@@ -1,0 +1,248 @@
+#ifndef __FLASH_H
+#define __FLASH_H
+
+#include "esp_err.h"
+
+
+extern uint8_t ChangeFlash;
+extern uint16_t count_write_Flash;
+
+typedef enum
+{
+	FLASH_BLOCK1_SSID,
+	FLASH_BLOCK2_PN,
+	FLASH_BLOCK3_NET,
+	FLASH_BLOCK_LCD_CONFIG,
+	FLASH_BLOCK_EMAIL,
+	FLASH_BLOCK_SNTP,
+	FLASH_BLOCK_SPD,
+	FLASH_BLOCK_MSV,
+}E_BLOCK;
+
+
+#define STORAGE_TRENDLOG	"trendlog"
+
+
+#define STORAGE_NAMESPACE   "storage"
+#define FLASH_SSID_INFO		"SSID_INFO"
+#define FLASH_NET_INFO		"NET_INFO"
+#define FLASH_PANEL_NAME	"PANEL_NAME"
+#define FLASH_LCD_CONFIG	"LCD_CONFIG"
+#define FLASH_READ_POINT_TIMER "READ_POINT_TIMER"
+#define FLASH_EMAIL			"Email_Setting"
+#define FLASH_SNTP			"Email_SNTP"
+#define FLASH_SPD_CNT		"SPD_CNT"
+#define FLASH_MSV			"MSV"
+
+
+
+#define FLASH_MODBUS_ID		"MODBUS_ID"
+#define FLASH_BAUD_RATE		"BAUD_RATE"
+//#define FLASH_INPUT_INFO	"INPUT_INFO"
+//#define FLASH_INPUT_FLAG	"INPUT_FLAG"
+//#define FLASH_OUTPUT_INFO	"OUTPUT_INFO"
+//#define FLASH_OUTPUT_FLAG	"OUTPUT_FLAG"
+#define FLASH_SERIAL_NUM1	"SERIAL_NUM_1"
+#define FLASH_SERIAL_NUM2	"SERIAL_NUM_2"
+#define FLASH_SERIAL_NUM3	"SERIAL_NUM_3"
+#define FLASH_SERIAL_NUM4	"SERIAL_NUM_4"
+#define FLASH_RESUME_PACKAGE "RESUME_PACKAGE"
+#define FLASH_BOOTLOADER    "BOOTLOADER"
+#define FLASH_COUNT_REBOOT	"COUNT_REBOOT"
+#define FLASH_SUB_TYPE		"SUB_TYPE"
+#define FLASH_JASON			"WEBWIEW_JASON"
+
+
+#define FLASH_UART2_CONFIG	"UART2_CONFIG"
+#define FLASH_UART_CONFIG	"UART0_CONFIG"
+#define FLASH_SN_WRITE		"SN_WRITE"
+#define FLASH_MINI_TYPE		"MINI_TYPE"
+#define FLASH_MUL_I2C_MODE	"MUL_I2C_MODE"
+#define FLASH_THEME_TYPE	"THEME_TYPE"
+#define FLASH_DIS_HOME_SCREEN	"DIS_HOME_SCREEN"
+#define FLASH_NETWORK_NUMBER "NETWORK_NUMBER"
+#define FLASH_MSTP_NETWORK  "MSTP_NETWORK"
+#define FLASH_BAUD_RATE2	"BAUD_RATE2"
+#define FLASH_INSTANCE1		"INSTANCE1"
+#define FLASH_INSTANCE2		"INSTANCE2"
+#define FLASH_INSTANCE3		"INSTANCE3"
+#define FLASH_INSTANCE4		"INSTANCE4"
+
+#define FLASH_EN_TIME_SYNC_PC	"EN_SYNC_PC"
+#define FLASH_EN_SNTP			"EN_SNTP"
+
+#define FLASH_EN_USERNAME	"EN_USERNAME"
+#define FLASH_TIME_ZONE		"TIME_ZONE"
+#define FLASH_DSL			"DSL"
+#define FLASH_MAX_VARS		"MAX_VARS"
+#define FLASH_MAX_INS		"MAX_INS"
+#define FLASH_MAX_OUTS		"MAX_OUTS"
+#define FLASH_TCP_PORT      "TCP_PORT"
+#define FLASH_TCP_TYPE		"TCP_TYPE"
+
+#define FLASH_IN1_CAL		"IN1_CAL"
+#define FLASH_IN2_CAL		"IN2_CAL"
+#define FLASH_IN3_CAL		"IN3_CAL"
+#define FLASH_IN4_CAL		"IN4_CAL"
+#define FLASH_IN5_CAL		"IN5_CAL"
+#define FLASH_IN6_CAL		"IN6_CAL"
+#define FLASH_IN7_CAL		"IN7_CAL"
+#define FLASH_IN8_CAL		"IN8_CAL"
+#define FLASH_IN9_CAL		"IN9_CAL"
+#define FLASH_IN10_CAL		"IN10_CAL"
+#define FLASH_IN11_CAL		"IN11_CAL"
+#define FLASH_IN12_CAL		"IN12_CAL"
+#define FLASH_IN13_CAL		"IN13_CAL"
+#define FLASH_IN14_CAL		"IN14_CAL"
+#define FLASH_IN15_CAL		"IN15_CAL"
+#define FLASH_IN16_CAL		"IN16_CAL"
+#define FLASH_IN17_CAL		"IN7_CAL"
+#define FLASH_IN18_CAL		"IN8_CAL"
+#define FLASH_IN19_CAL		"IN9_CAL"
+#define FLASH_IN10_CAL		"IN10_CAL"
+#define FLASH_IN11_CAL		"IN11_CAL"
+#define FLASH_IN12_CAL		"IN12_CAL"
+#define FLASH_IN13_CAL		"IN13_CAL"
+#define FLASH_IN14_CAL		"IN14_CAL"
+
+#define FLASH_ICON_CONFIG	"ICON_CONFIG"
+#define FLASH_LCD_TIME_OFF_DELAY		"LCD_TOFF"
+#define FLASH_FIX_COM_CONFIG	"COM_CONFIG"
+#define FLASH_WRITE_FLASH	"WRT_FLASH"
+
+#define FLASH_LSW_ONTIME	"LSW_ON_T"
+#define FLASH_LSW_OFFTIME	"LSW_OFF_T"
+
+/* WireGuard flash storage keys */
+#define FLASH_WIREGUARD_ENABLE	"WG_ENABLE"
+#define FLASH_WIREGUARD_PRIVATE_KEY "WG_PRIV_KEY"
+#define FLASH_WIREGUARD_PEER_PUBLIC_KEY "WG_PEER_PUB_KEY"
+#define FLASH_WIREGUARD_PRESHARED_KEY "WG_PSK"
+#define FLASH_WIREGUARD_LOCAL_IP "WG_LOCAL_IP"
+#define FLASH_WIREGUARD_LOCAL_IP1 "WG_LOCAL_IP1"
+#define FLASH_WIREGUARD_LOCAL_IP2 "WG_LOCAL_IP2"
+#define FLASH_WIREGUARD_LOCAL_IP3 "WG_LOCAL_IP3"
+#define FLASH_WIREGUARD_LOCAL_IP4 "WG_LOCAL_IP4"
+#define FLASH_WIREGUARD_PORT "WG_PORT"
+#define FLASH_WIREGUARD_PEER_IP "WG_PEER_IP"
+#define FLASH_WIREGUARD_PEER_IP1 "WG_PEER_IP1"
+#define FLASH_WIREGUARD_PEER_IP2 "WG_PEER_IP2"
+#define FLASH_WIREGUARD_PEER_IP3 "WG_PEER_IP3"
+#define FLASH_WIREGUARD_PEER_IP4 "WG_PEER_IP4"
+
+#define FLASH_CURRENT_TLG_PAGE	"TLG_PAGE"
+
+
+#define FLASH_ENABLE_MQTT        "MQTT_EN"
+#define FLASH_ENABLE_DEBUG
+
+#define FLASH_USE_PASSWORD		"USE_PASSWORD"
+#define FLASH_USER_PASSWORD0	"USER_PWD0"
+#define FLASH_USER_PASSWORD1	"USER_PWD1"
+#define FLASH_USER_PASSWORD2	"USER_PWD2"
+#define FLASH_USER_PASSWORD3	"USER_PWD3"
+#define FLASH_ENABLE_ALARM		"ENABLE_ALARM"
+#define FLASH_ENABLE_SCROLL		"ENABLE_SCROLL"
+#define FLASH_PID1_SETPOINT		"PID1_SP"
+#define FLASH_PID2_SETPOINT		"PID2_SP"
+#define FLASH_PID3_SETPOINT		"PID3_SP"
+#define FLASH_PRESSURE_UNIT		"PRESS_UNIT"
+#define FLASH_PRESSURE_OFFSET	"PRESS_OFFSET"
+#define FLASH_OUTPUT_RANGE		"OUT_RANGE"
+#define FLASH_SCREEN_AREA1		"SCR_AREA1"
+#define FLASH_SCREEN_AREA2		"SCR_AREA2"
+#define FLASH_SCREEN_AREA3		"SCR_AREA3"
+#define FLASH_INT_TEMP_OFFSET	"INT_TEMP_OFFS"
+#define FLASH_DEG_C_OR_F		"DEG_C_OR_F"
+#define FLASH_BACKLIGHT_KEEP	"BL_KEEP_SEC"
+#define FLASH_SENSOR_SELECT		"SENSOR_SELECT"
+#define FLASH_HUM_OFFSET		"HUM_OFFSET"
+#define FLASH_TEM_OFFSET0		"TEM_OFF0"
+#define FLASH_TEM_OFFSET1		"TEM_OFF1"
+#define FLASH_TEM_OFFSET2		"TEM_OFF2"
+#define FLASH_HUM_OFFSET0		"HUM_OFF0"
+#define FLASH_HUM_OFFSET1		"HUM_OFF1"
+#define FLASH_HUM_OFFSET2		"HUM_OFF2"
+#define FLASH_HUM_OUT_SEL		"HUM_OUT_SEL"
+#define FLASH_DEW_PT_MIN		"DEW_PT_MIN"
+#define FLASH_DEW_PT_MAX		"DEW_PT_MAX"
+#define FLASH_CO2_ALARM_SP		"CO2_ALM_SP"
+#define FLASH_CO2_PREALARM_SP	"CO2_PREALM_SP"
+#define FLASH_CO2_INT_OFFSET	"CO2_INT_OFFS"
+#define FLASH_CO2_ASC0			"CO2_ASC0"
+#define FLASH_CO2_ASC1			"CO2_ASC1"
+#define FLASH_CO2_ASC2			"CO2_ASC2"
+#define FLASH_CO2_FRC0			"CO2_FRC0"
+#define FLASH_CO2_FRC1			"CO2_FRC1"
+#define FLASH_CO2_FRC2			"CO2_FRC2"
+#define FLASH_CO2_BUS			"CO2_BUS"
+
+
+
+/*#define FLASH_POINT_OUT		"POINT_OUT"
+#define FLASH_POINT_IN		"POINT_IN"
+#define FLASH_POINT_VAR		"POINT_VAR"
+#define FLASH_POINT_CON		"POINT_CON"
+#define FLASH_POINT_WR		"POINT_WR"
+#define FLASH_POINT_AR		"POINT_AR"
+#define FLASH_POINT_PRG		"POINT_PRG"
+#define FLASH_POINT_TZ		"POINT_TZ"
+#define FLASH_POINT_AMON	"POINT_AMON"
+#define FLASH_POINT_GRP		"POINT_GRP"
+
+#define FLASH_POINT_ARRAY			"POINT_ARRAY"
+#define FLASH_POINT_ALARMM			"POINT_ALARMM"
+#define FLASH_POINT_UNIT			"POINT_UNIT"
+#define FLASH_POINT_USER_NAME		"POINT_USER_NAME"
+#define FLASH_POINT_ALARM_SET		"POINT_ALARM_SET"
+#define FLASH_POINT_WR_TIME			"POINT_WR_TIME"
+#define FLASH_POINT_AR_DATA			"POINT_AR_DATA"
+#define FLASH_POINT_GRP_POINT		"POINT_GRP_POINT"
+#define FLASH_POINT_TBL				"POINT_TBL"
+#define FLASH_POINT_ID_ROUTION		"POINT_ID_ROUTION"
+*/
+
+
+/*#define FLASH_SOUND_TRIGGER_VALUE	"SOUND_TRIGGER_VALUE"
+#define FLASH_SOUND_TRIGGER_TIMER	"SOUND_TRIGGER_TIMER"
+#define FLASH_LIGHT_TRIGGER_VALUE	"LIGHT_TRIGGER_VALUE"
+#define FLASH_LIGHT_TRIGGER_TIMER	"LIGHT_TRIGGER_TIMER"
+#define FLASH_CO2_TRIGGER_VALUE	"CO2_TRIGGER_VALUE"
+#define FLASH_CO2_TRIGGER_TIMER	"CO2_TRIGGER_TIMER"
+#define FLASH_OCC_TRIGGER_VALUE	"OCC_TRIGGER_VALUE"
+#define FLASH_OCC_TRIGGER_TIMER	"OCC_TRIGGER_TIMER"
+#define FLASH_SHT31_TEMP_OFFSET "SHT31_TEMP_OFFSET"
+#define FLASH_10K_TEMP_OFFSET	"10K_TEMP_OFFSET"
+#define FLASH_AMBIENT_TEMP_OFFSET	"AMBIENT_TEMP_OFFSET"
+#define FLASH_OBJECT_TEMP_OFFSET	"OBJECT_TEMP_OFFSET"*/
+
+extern esp_err_t save_block(uint8_t key);
+extern esp_err_t read_default_from_flash(void);
+extern esp_err_t save_wifi_info(void);
+void Save_MSV(void);
+void Save_SNTP_sever(void);
+extern esp_err_t save_point_info(uint8_t point_type);
+/* Write pending T3000 point tables before reboot. */
+void flush_point_info(void);
+extern esp_err_t save_uint8_to_flash(const char* key, uint8_t value);
+void load_screen_area_from_flash(void);
+extern esp_err_t save_uint16_to_flash(const char* key, uint16_t value);
+extern esp_err_t read_uint8_from_falsh(const char* key, uint8_t* value);
+extern esp_err_t read_uint16_from_falsh(const char* key, uint16_t* value);
+extern esp_err_t read_blob_info(const char* key, const void* pValue, size_t length);
+extern esp_err_t save_blob_info(const char* key, const void* pValue, size_t length);
+extern esp_err_t save_int16_to_flash(const char* key, int16_t value);
+void save_output_range(void);
+extern void clear_count_reboot(void);
+
+void Save_SPD_CNT(void);
+
+esp_err_t Save_Ethernet_Info(void);
+esp_err_t Save_Lcd_config(void);
+
+esp_err_t save_wireguard_config_to_flash(void);
+esp_err_t load_wireguard_config_from_flash(void);
+
+extern void Flash_Inital(void);
+extern void read_point_info(void);
+#endif
